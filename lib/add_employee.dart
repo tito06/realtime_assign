@@ -35,7 +35,6 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
       _nameController.text = widget.employee!.name;
       _selectedRole = widget.employee!.role;
 
-      // Parse dates correctly if not null
       _toDate = widget.employee!.toDate != null
           ? DateTime.tryParse(widget.employee!.toDate!)
           : null;
@@ -214,7 +213,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                   Expanded(
                     child: TextButton(
                       onPressed: () {
-                        Navigator.pop(context); // Cancel button
+                        Navigator.pop(context);
                       },
                       style: TextButton.styleFrom(
                         backgroundColor: Colors.red,

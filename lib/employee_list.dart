@@ -23,12 +23,10 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
 
   String formatDate(String date) {
     try {
-      // Convert the string to DateTime
       final parsedDate = DateTime.parse(date);
-      // Format the date into a more readable format
       return DateFormat('yyyy-MM-dd').format(parsedDate);
     } catch (e) {
-      return date; // Return the original date string if parsing fails
+      return date;
     }
   }
 
@@ -49,23 +47,21 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
               child: CircularProgressIndicator(),
             );
           } else if (state is EmployeeLoaded) {
-            // Separate employees into current and previous employees
             List<Employee> currentEmployees = [];
             List<Employee> previousEmployees = [];
             for (var employee in state.employees) {
               if (employee.toDate!.isEmpty) {
-                currentEmployees.add(employee); // No "to date" means current
+                currentEmployees.add(employee);
               } else {
-                previousEmployees.add(employee); // "To date" means previous
+                previousEmployees.add(employee);
               }
             }
 
             return ListView(
               children: [
                 if (currentEmployees.isNotEmpty)
-                  // Display Current Employees if there are any
                   Container(
-                    color: Colors.grey[300], // Grey background
+                    color: Colors.grey[300],
                     padding: const EdgeInsets.all(8.0),
                     child: const Text(
                       "Current Employees",
@@ -103,7 +99,6 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                                       AddEmployeeScreen(employee: employee),
                                 ),
                               );
-                              // Refresh the list after returning from the edit screen
                               context.read<EmployeeBloc>().add(LoadEmployees());
                             },
                           ),
@@ -120,9 +115,8 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                     );
                   }).toList(),
                 if (previousEmployees.isNotEmpty)
-                  // Display Previous Employees if there are any
                   Container(
-                    color: Colors.grey[300], // Grey background
+                    color: Colors.grey[300],
                     padding: const EdgeInsets.all(8.0),
                     child: const Text(
                       "Previous Employees",
@@ -158,7 +152,6 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                                       AddEmployeeScreen(employee: employee),
                                 ),
                               );
-                              // Refresh the list after returning from the edit screen
                               context.read<EmployeeBloc>().add(LoadEmployees());
                             },
                           ),
@@ -190,7 +183,6 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
             context,
             MaterialPageRoute(builder: (context) => AddEmployeeScreen()),
           );
-          // Reload the employee list after returning from the add screen
           context.read<EmployeeBloc>().add(LoadEmployees());
         },
         child: Icon(

@@ -25,12 +25,12 @@ class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
 
     on<UpdateEmployee>((event, emit) async {
       await databaseHelper.updateEmployee(event.employee);
-      add(LoadEmployees()); // Reload list after update
+      add(LoadEmployees());
     });
 
     on<DeleteEmploye>((event, emit) async {
       await databaseHelper.deleteEmployee(event.id);
-      add(LoadEmployees()); // Reload list after deletion
+      add(LoadEmployees());
     });
   }
 }
